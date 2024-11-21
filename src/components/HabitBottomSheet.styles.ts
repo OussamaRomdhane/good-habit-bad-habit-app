@@ -6,6 +6,7 @@ import {
 } from "../utils/colors";
 
 const styles = StyleSheet.create({
+  container: { marginBottom: Spacings.s10 },
   justDidButtonLabel: { fontWeight: "bold" },
   justDidButton: { margin: Spacings.s4 },
   noActionContainer: {

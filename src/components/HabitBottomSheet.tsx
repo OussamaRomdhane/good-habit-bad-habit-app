@@ -1,15 +1,17 @@
 import { ScrollView } from "react-native";
 import Confetti from "react-native-confetti";
-import { Button, Text, View } from "react-native-ui-lib";
+import { Button, Text, Toast, View } from "react-native-ui-lib";
 import { BarChart, barDataItem } from "react-native-gifted-charts";
 import { useEffect, useRef, useState } from "react";
 import { Modalize } from "react-native-modalize";
 import { Portal } from "react-native-portalize";
-import { getSecondaryHabitTypeColor } from "../utils/colors";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useAtomValue, useSetAtom } from "jotai";
 import { ProgressBar } from "@react-native-community/progress-bar-android";
+import uuid from "react-native-uuid";
+import React from "react";
+import Dialog from "react-native-dialog";
 
 import { IconSymbol } from "./ui/IconSymbol";
 import { ThemedText } from "./ThemedText";
@@ -18,13 +20,11 @@ import {
   addTrackedHabitActionAtom,
   removeTrackedHabitActionAtom,
 } from "../state/trackedHabits";
-
-import uuid from "react-native-uuid";
+import { getSecondaryHabitTypeColor } from "../utils/colors";
 import {
   closeCurrentOpenBottomSheetAtom,
   getCurrentOpenBottomSheetAtom,
 } from "../state/bottomSheets";
-import React from "react";
 import {
   getCurrentHighlightedHabitAtom,
   setCurrentHighlightedHabitAtom,
@@ -102,8 +102,18 @@ export const HabitBottomSheet = () => {
   const barChartMaxValue = Math.max(...barChartData.map(({ value }) => value));
 
   const explosionRef = useRef<Confetti | null>(null);
-
+  const [shouldShowSuccessToast, setShouldShowSuccessToast] = useState(false);
+  const [shouldShowErrorToast, setShouldShowErrorToast] = useState(false);
+  const [shouldShowConfirmationDialog, setShouldShowConfirmationDialog] =
+    useState(false);
   const [disableDidItButton, setDisableDidItButton] = useState(false);
+  const [actionToDelete, setActionToDelete] = useState<
+    | {
+        actionId: string;
+        habitId: string;
+      }
+    | undefined
+  >(undefined);
 
   const addTrackedHabitAction = useSetAtom(addTrackedHabitActionAtom);
   const removeTrackedHabitAction = useSetAtom(removeTrackedHabitActionAtom);
@@ -124,6 +134,10 @@ export const HabitBottomSheet = () => {
       actionSheetRef.current?.open();
     }
   }, [currentOpenBottomSheet]);
+
+  useEffect(() => {
+    setDisableDidItButton(false);
+  }, [habit]);
 
   return (
     <Portal>
@@ -183,7 +197,7 @@ export const HabitBottomSheet = () => {
         }
         onClosed={() => closeCurrentOpenBottomSheet()}
       >
-        <ScrollView>
+        <ScrollView style={styles.container}>
           <View>
             <Confetti
               confettiCount={25}
@@ -310,8 +324,11 @@ export const HabitBottomSheet = () => {
                         name="delete-forever"
                         size={18}
                         onPress={() => {
-                          /* TODO: Add removal logic + confirmation modal */
-                          removeTrackedHabitAction(habit.id, action.id);
+                          setShouldShowConfirmationDialog(true);
+                          setActionToDelete({
+                            actionId: action.id,
+                            habitId: habit.id,
+                          });
                         }}
                       />
                     </View>
@@ -321,6 +338,59 @@ export const HabitBottomSheet = () => {
             )}
           </View>
         </ScrollView>
+        <Toast
+          visible={shouldShowSuccessToast}
+          position={"bottom"}
+          autoDismiss={1000}
+          backgroundColor="#27ae60"
+          message="Deleted"
+          onDismiss={() => {
+            setShouldShowSuccessToast(false);
+          }}
+          onClose={() => {
+            setShouldShowSuccessToast(false);
+          }}
+        />
+        <Toast
+          visible={shouldShowErrorToast}
+          position={"bottom"}
+          autoDismiss={2000}
+          backgroundColor="#e74c3cda"
+          message="Error occurred"
+          onDismiss={() => {
+            setShouldShowErrorToast(false);
+          }}
+          onClose={() => {
+            setShouldShowErrorToast(false);
+          }}
+        />
+        <Dialog.Container
+          visible={shouldShowConfirmationDialog}
+          onRequestClose={() => setShouldShowConfirmationDialog(false)}
+        >
+          <Dialog.Title>Remove history item?</Dialog.Title>
+          <Dialog.Description>This cannot be undone</Dialog.Description>
+          <Dialog.Button
+            label="Cancel"
+            onPress={() => setShouldShowConfirmationDialog(false)}
+          />
+          <Dialog.Button
+            label="Remove"
+            onPress={() => {
+              if (actionToDelete !== undefined) {
+                removeTrackedHabitAction(
+                  actionToDelete.habitId,
+                  actionToDelete.actionId
+                );
+                setActionToDelete(undefined);
+                setShouldShowSuccessToast(true);
+              } else {
+                setShouldShowErrorToast(true);
+              }
+              setShouldShowConfirmationDialog(false);
+            }}
+          />
+        </Dialog.Container>
       </Modalize>
     </Portal>
   );

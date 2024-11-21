@@ -3,7 +3,6 @@ import {
   Colors,
   RadioButton,
   RadioGroup,
-  Spacings,
   Text,
   TextField,
   Toast,
@@ -18,10 +17,6 @@ import { ScrollView } from "react-native";
 import { IconSymbol } from "../../ui/IconSymbol";
 import { closeCurrentOpenModalAtom } from "../../../state/modals";
 import { addCustomHabitAtom } from "../../../state/customHabits";
-import {
-  getPrimaryHabitTypeColor,
-  getSecondaryHabitTypeColor,
-} from "../../../utils/colors";
 
 import { styles } from "./AddCustomHabitModalPart.styles";
 
@@ -44,17 +39,8 @@ const AddACustomHabitModalPart = ({
 
   return (
     <ScrollView>
-      <View
-        style={{
-          flexDirection: "row",
-          gap: Spacings.s4,
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: Spacings.s6,
-          paddingBottom: 0,
-        }}
-      >
-        <Text text60 style={{ width: "auto", color: "#212427" }}>
+      <View style={styles.headerContainer}>
+        <Text text60 style={styles.headerTitle}>
           Add a custom habit
         </Text>
         <IconSymbol
@@ -66,46 +52,16 @@ const AddACustomHabitModalPart = ({
           }}
         />
       </View>
-      <View
-        style={{
-          marginTop: Spacings.s6,
-          flexDirection: "column",
-          gap: Spacings.s8,
-          justifyContent: "flex-start",
-          alignItems: "flex-start",
-          padding: Spacings.s6,
-          paddingBottom: Spacings.s4,
-        }}
-      >
-        <View
-          style={{
-            flexDirection: "column",
-            gap: Spacings.s8,
-            width: "100%",
-            justifyContent: "space-between",
-            alignItems: "flex-start",
-          }}
-        >
+      <View style={styles.contentContainer}>
+        <View style={styles.nameAndEmojiContainer}>
           <TouchableOpacity
-            style={{
-              alignSelf: "center",
-              width: 150,
-              height: 150,
-              borderRadius: "50%",
-              borderWidth: 1,
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-              borderColor:
-                chosenEmoji === undefined
-                  ? "#7f8c8d"
-                  : getSecondaryHabitTypeColor(habitType),
-              backgroundColor:
-                chosenEmoji === undefined
-                  ? "transparent"
-                  : getPrimaryHabitTypeColor(habitType),
-            }}
+            style={[
+              styles.emojiChoiceView,
+              habitType !== undefined &&
+                (habitType === "bad"
+                  ? styles.emojiChoiceViewBadHabit
+                  : styles.emojiChoiceViewGoodHabit),
+            ]}
             onPress={() => setIsEmojiPickerOpen(true)}
           >
             {!chosenEmoji && (
@@ -121,12 +77,7 @@ const AddACustomHabitModalPart = ({
           </TouchableOpacity>
           <TextField
             placeholder="Habit's name"
-            fieldStyle={{
-              borderBottomWidth: 1,
-              borderColor: "#7f8c8d",
-              padding: Spacings.s2,
-              width: "100%",
-            }}
+            fieldStyle={styles.habitNameField}
             maxLength={30}
             enableErrors
             validateOnChange
@@ -139,48 +90,27 @@ const AddACustomHabitModalPart = ({
           />
         </View>
 
-        <View
-          style={{
-            flexDirection: "column",
-            gap: Spacings.s3,
-            justifyContent: "flex-start",
-            alignItems: "flex-start",
-          }}
-        >
+        <View style={styles.habitTypeContainer}>
           <Text text70M>How would you like to classify this habit?</Text>
           <RadioGroup
             initialValue={habitType}
             onValueChange={setHabitType}
             animated
-            style={{
-              flexDirection: "row",
-              gap: Spacings.s5,
-              justifyContent: "flex-start",
-              alignItems: "center",
-            }}
+            style={styles.habitTypeRadioGroup}
           >
             <RadioButton
-              labelStyle={{ marginLeft: Spacings.s2 }}
+              labelStyle={styles.habitTypeRadioLabel}
               value="good"
               label="😇 Good habit"
             />
             <RadioButton
-              labelStyle={{ marginLeft: Spacings.s2 }}
+              labelStyle={styles.habitTypeRadioLabel}
               value="bad"
               label="😈 Bad habit"
             />
           </RadioGroup>
         </View>
-        <View
-          style={{
-            marginTop: Spacings.s2,
-            flexDirection: "row",
-            width: "100%",
-            gap: Spacings.s3,
-            justifyContent: "flex-end",
-            alignItems: "flex-end",
-          }}
-        >
+        <View style={styles.actionButtons}>
           <Button
             size={Button.sizes.large}
             label="Add habit to list"

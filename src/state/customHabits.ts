@@ -30,3 +30,11 @@ export const addCustomHabitAtom = atom(
     }
   }
 );
+
+export const clearCustomHabitsAtom = atom(null, (_, set) => {
+  try {
+    set(customHabitsAtom, []);
+  } catch (e) {
+    console.error(e);
+  }
+});
