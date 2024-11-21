@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "GoodHabitBadHabit",
+    "slug": "GoodHabitBadHabit",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.eiilo.goodhabitbadhabit"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.eiilo.goodhabitbadhabit"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "47f71b6a-f8c8-4cbb-82b6-ef18df1cadbf"
+      }
+    }
+  }
+}

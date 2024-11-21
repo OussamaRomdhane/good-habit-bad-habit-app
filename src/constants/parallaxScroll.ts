@@ -1,0 +1,1 @@
+export const PARALLAX_SCROLL_HEADER_HEIGHT = 175;

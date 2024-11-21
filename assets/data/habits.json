@@ -1,0 +1,67 @@
+[
+  { "name": "Night owl", "emoji": "🦉", "type": "bad" },
+  { "name": "Brushing teeth", "emoji": "🪥", "type": "good" },
+  { "name": "Lotion", "emoji": "🧴", "type": "good" },
+  { "name": "Sunscreen", "emoji": "🧴", "type": "good" },
+  { "name": "Hydrate", "emoji": "💧", "type": "good" },
+  { "name": "Family time", "emoji": "🏡", "type": "good" },
+  { "name": "Volunteering", "emoji": "🫂", "type": "good" },
+  { "name": "Green action", "emoji": "🌱", "type": "good" },
+  { "name": "Recycled", "emoji": "♻️", "type": "good" },
+  { "name": "Binge watching", "emoji": "📺", "type": "bad" },
+  { "name": "Studying", "emoji": "🤓", "type": "good" },
+  { "name": "Learning", "emoji": "🧑‍🎓", "type": "good" },
+  { "name": "A good night's sleep", "emoji": "😴", "type": "good" },
+  { "name": "Don't use a credit card", "emoji": "💳", "type": "good" },
+  { "name": "Spend less", "emoji": "🤑", "type": "good" },
+  { "name": "Saving money", "emoji": "💰", "type": "good" },
+  { "name": "Reading", "emoji": "📚", "type": "good" },
+  { "name": "Junk food", "emoji": "🍟", "type": "bad" },
+  { "name": "Self care", "emoji": "💅", "type": "good" },
+  { "name": "Treat yourself!", "emoji": "💆‍♀️", "type": "good" },
+  { "name": "Yoga", "emoji": "🪷", "type": "good" },
+  { "name": "Drugs", "emoji": "💊", "type": "bad" },
+  { "name": "Diet", "emoji": "🥗", "type": "good" },
+  { "name": "Meditation", "emoji": "🧘", "type": "good" },
+  { "name": "Swimming", "emoji": "🏊", "type": "good" },
+  {
+    "name": "Going to the gym",
+    "emoji": "🏋️",
+    "type": "good"
+  },
+  {
+    "name": "Smoking",
+    "emoji": "🚬",
+    "type": "bad"
+  },
+  {
+    "name": "Excessive drinking",
+    "emoji": "🥴",
+    "type": "bad"
+  },
+  {
+    "name": "Drinking",
+    "emoji": "🍺",
+    "type": "bad"
+  },
+  {
+    "name": "FAP",
+    "emoji": "🍆",
+    "type": "bad"
+  },
+  {
+    "name": "Running",
+    "emoji": "🏃",
+    "type": "good"
+  },
+  {
+    "name": "Boxing",
+    "emoji": "🥊",
+    "type": "good"
+  },
+  {
+    "name": "Gambling",
+    "emoji": "💸",
+    "type": "bad"
+  }
+]
