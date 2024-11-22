@@ -1,16 +1,15 @@
 import React from "react";
 import { ScrollView } from "react-native";
-
 import { useAtomValue, useSetAtom } from "jotai";
 import { Chip, Text, TouchableOpacity, View } from "react-native-ui-lib";
 
 import { getFiltersAtom, setFiltersAtom } from "../state/filters";
 import { setCurrentOpenModalAtom } from "../state/modals";
 import { MAIN_PAGE_SORTING_OPTIONS } from "../constants/filters";
-
 import { IconSymbol } from "./ui/IconSymbol";
-import { styles } from "./FiltersAndSorting.styles";
 import { ThemedText } from "./ThemedText";
+
+import { styles } from "./FiltersAndSorting.styles";
 
 const typeFilterChipLabels = {
   good: "😇 only",

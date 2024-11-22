@@ -1,16 +1,5 @@
 import React from "react";
-import {
-  Badge,
-  Spacings,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native-ui-lib";
-
-import {
-  getPrimaryHabitTypeColor,
-  getSecondaryHabitTypeColor,
-} from "../utils/colors";
+import { Badge, Text, TouchableOpacity, View } from "react-native-ui-lib";
 
 import { styles } from "./PresetHabit.styles";
 

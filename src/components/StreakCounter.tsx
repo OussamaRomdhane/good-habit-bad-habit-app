@@ -1,14 +1,15 @@
 import React from "react";
 import { View } from "react-native-ui-lib";
+import { barDataItem } from "react-native-gifted-charts";
+
 import {
   getPrimaryHabitTypeColor,
   getSecondaryHabitTypeColor,
 } from "../utils/colors";
-
 import { IconSymbol } from "./ui/IconSymbol";
 import { ThemedText } from "./ThemedText";
+
 import { styles } from "./StreakCounter.styles";
-import { barDataItem } from "react-native-gifted-charts";
 
 type ChartDataItem = barDataItem & { id: string };
 

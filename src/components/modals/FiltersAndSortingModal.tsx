@@ -5,7 +5,6 @@ import {
   Picker,
   RadioButton,
   RadioGroup,
-  Spacings,
   Switch,
   Text,
   TouchableOpacity,

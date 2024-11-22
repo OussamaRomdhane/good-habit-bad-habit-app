@@ -7,9 +7,9 @@ import { Badge, Text } from "react-native-ui-lib";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 import { IconSymbol } from "./ui/IconSymbol";
+import { setCurrentOpenBottomSheetAtom } from "../state/bottomSheets";
 
 import { styles } from "./TrackedHabit.styles";
-import { setCurrentOpenBottomSheetAtom } from "../state/bottomSheets";
 
 dayjs.extend(relativeTime);
 

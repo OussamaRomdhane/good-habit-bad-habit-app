@@ -30,7 +30,6 @@ import { getMainPageSortingFunction } from "../../../utils/sorting";
 import { getCurrentOpenBottomSheetAtom } from "../../../state/bottomSheets";
 import { setCurrentHighlightedHabitAtom } from "../../../state/highlightedHabit";
 import { IconSymbol } from "../../ui/IconSymbol";
-import { getSecondaryHabitTypeColor } from "../../../utils/colors";
 
 import { styles } from "./HomeScreen.styles";
 

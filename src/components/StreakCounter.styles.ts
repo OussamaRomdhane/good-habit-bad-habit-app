@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
+import { Spacings } from "react-native-ui-lib";
 
 import { getSecondaryHabitTypeColor } from "../utils/colors";
-import { Spacings } from "react-native-ui-lib";
 
 const styles = StyleSheet.create({
   root: {

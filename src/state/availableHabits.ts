@@ -1,7 +1,6 @@
 import { atom } from "jotai";
 
 import defaultHabits from "../../assets/data/habits.json";
-
 import { getCustomHabitsAtom } from "./customHabits";
 
 export const getAvailableHabitsAtom = atom(async (get) => {

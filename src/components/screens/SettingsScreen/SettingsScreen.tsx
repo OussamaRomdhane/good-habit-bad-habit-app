@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Dialog from "react-native-dialog";
-import { Button, Toast, View, Text, Spacings } from "react-native-ui-lib";
+import { Button, Toast } from "react-native-ui-lib";
 import { useSetAtom } from "jotai";
 import { KeyboardAvoidingView } from "react-native";
 

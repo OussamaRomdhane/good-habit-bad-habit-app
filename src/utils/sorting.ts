@@ -1,45 +1,45 @@
-import {DEFAULT_SORTING_VALUE} from '../constants/filters';
+import { DEFAULT_SORTING_VALUE } from "../constants/filters";
 
 export const getMainPageSortingFunction = (
-  pickedSortingValue: MainPageSortingValue = DEFAULT_SORTING_VALUE,
+  pickedSortingValue: MainPageSortingValue = DEFAULT_SORTING_VALUE
 ): ((a: CalculatedTrackedHabit, b: CalculatedTrackedHabit) => number) => {
   return (a, b) => {
     switch (pickedSortingValue) {
-      case 'z-a':
+      case "z-a":
         return a.name < b.name ? 1 : -1;
-      case 'favorites-first':
+      case "favorites-first":
         return 0;
-      case 'favorites-last':
+      case "favorites-last":
         return 0;
-      case 'bad-good':
+      case "bad-good":
         return a.type === b.type
           ? a.name > b.name
             ? 1
             : -1
-          : a.type === 'bad'
+          : a.type === "bad"
           ? -1
           : 1;
-      case 'good-bad':
+      case "good-bad":
         return a.type === b.type
           ? a.name > b.name
             ? 1
             : -1
-          : a.type === 'good'
+          : a.type === "good"
           ? -1
           : 1;
-      case 'less-streaks':
+      case "less-streaks":
         return a.streak === b.streak
           ? a.name > b.name
             ? 1
             : -1
           : a.streak - b.streak;
-      case 'longest-streaks':
+      case "longest-streaks":
         return a.streak === b.streak
           ? a.name > b.name
             ? 1
             : -1
           : b.streak - a.streak;
-      case 'a-z':
+      case "a-z":
       default:
         return a.name > b.name ? 1 : -1;
     }

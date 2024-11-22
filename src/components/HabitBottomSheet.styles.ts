@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { Spacings } from "react-native-ui-lib";
+
 import {
   getPrimaryHabitTypeColor,
   getSecondaryHabitTypeColor,

@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+
 import { PARALLAX_SCROLL_HEADER_HEIGHT } from "../constants/parallaxScroll";
 
 const styles = StyleSheet.create({
