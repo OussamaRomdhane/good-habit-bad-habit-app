@@ -35,6 +35,8 @@ const styles = StyleSheet.create({
   keyboardAvoidingView: {
     flex: 1,
   },
+  startContainer: { flex: 1 },
+  startPicture: { height: 300, width: "100%" },
 });
 
 export { styles };

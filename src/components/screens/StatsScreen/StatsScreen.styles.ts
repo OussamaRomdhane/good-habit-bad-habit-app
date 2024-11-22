@@ -16,6 +16,26 @@ const styles = StyleSheet.create({
     gap: Spacings.s6,
     marginBottom: 100,
   },
+  startContainer: {
+    flex: 1,
+    width: "100%",
+    padding: Spacings.s4,
+    backgroundColor: "white",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: Spacings.s6,
+  },
+  startImage: {
+    width: 300,
+    height: 200,
+  },
+  startDescription: {
+    fontSize: 26,
+    textAlign: "center",
+    lineHeight: 42,
+  },
   headerImage: {
     color: "#808080",
     bottom: -100,

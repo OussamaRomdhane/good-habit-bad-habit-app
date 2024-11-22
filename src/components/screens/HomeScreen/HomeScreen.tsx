@@ -70,14 +70,32 @@ export function HomeScreen() {
           behavior="height"
           style={styles.keyboardAvoidingView}
         >
-          <ThemedView style={styles.titleContainer}>
-            <ThemedText style={styles.title}>Hey Oussama!</ThemedText>
-            <ThemedText style={styles.subTitle}>
-              Let's check your progress with your habits
-            </ThemedText>
-          </ThemedView>
+          {trackedHabits.length > 0 && (
+            <>
+              <ThemedView style={styles.titleContainer}>
+                <ThemedText style={styles.title}>Hey There!</ThemedText>
+                <ThemedText style={styles.subTitle}>
+                  Let's check your progress with your habits
+                </ThemedText>
+              </ThemedView>
 
-          <FiltersAndSorting />
+              <FiltersAndSorting />
+            </>
+          )}
+          {trackedHabits.length <= 0 && (
+            <View style={styles.startContainer}>
+              <ThemedView style={styles.titleContainer}>
+                <ThemedText style={styles.title}>Welcome!</ThemedText>
+                <ThemedText style={styles.subTitle}>
+                  Start by adding habits to track
+                </ThemedText>
+              </ThemedView>
+              <Image
+                source={require("../../../../assets/images/start.png")}
+                style={styles.startPicture}
+              />
+            </View>
+          )}
 
           <View style={styles.cardList}>
             {displayedHabits.map((displayedHabit) => (
