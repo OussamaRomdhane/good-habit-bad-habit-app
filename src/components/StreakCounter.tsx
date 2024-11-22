@@ -58,17 +58,17 @@ export function StreakCounter({ habit, barChartData }: Props) {
       {barChartData.length !== 0 && (
         <View>
           {habit.type === "good" && (
-            <ThemedText style={styles.centeredText}>
+            <ThemedText style={[styles.centeredText, styles.secondaryText]}>
               A streak for a good habit represents{" "}
-              <ThemedText style={styles.boldText}>
+              <ThemedText style={[styles.boldText, styles.secondaryText]}>
                 the number of days you do that habit
               </ThemedText>
             </ThemedText>
           )}
           {habit.type === "bad" && (
-            <ThemedText style={styles.centeredText}>
+            <ThemedText style={[styles.centeredText, styles.secondaryText]}>
               A streak for a bad habit represents{" "}
-              <ThemedText style={styles.boldText}>
+              <ThemedText style={[styles.boldText, styles.secondaryText]}>
                 the number of days you don't do that habit
               </ThemedText>
             </ThemedText>

@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     gap: Spacings.s1,
+    marginTop: Spacings.s2,
   },
   addAHabitButton: {
     position: "absolute",

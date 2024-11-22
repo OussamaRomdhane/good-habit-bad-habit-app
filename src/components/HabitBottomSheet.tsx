@@ -256,17 +256,15 @@ export const HabitBottomSheet = () => {
                     Last performed
                   </ThemedText>
                   <View style={styles.lastDidValueContainer}>
-                    <>
-                      <ThemedText style={styles.lastDidRelativeDate}>
-                        {habit?.lastDid
-                          ? `${dayjs().to(dayjs(habit.lastDid))}`
-                          : ""}
-                      </ThemedText>
+                    <ThemedText style={styles.lastDidRelativeDate}>
+                      {habit?.lastDid
+                        ? `${dayjs().to(dayjs(habit.lastDid))}`
+                        : ""}
+                    </ThemedText>
 
-                      <ThemedText style={styles.lastDidAbsoluteDate}>
-                        ({new Date(habit?.lastDid).toLocaleString()})
-                      </ThemedText>
-                    </>
+                    <ThemedText style={styles.lastDidAbsoluteDate}>
+                      {new Date(habit?.lastDid).toLocaleString()}
+                    </ThemedText>
                   </View>
                 </View>
                 <View style={styles.recentHistoryContainer}>

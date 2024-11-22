@@ -4,21 +4,32 @@ import { Spacings } from "react-native-ui-lib";
 import { getPrimaryHabitTypeColor } from "../../../utils/colors";
 
 const styles = StyleSheet.create({
+  root: {
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    flexWrap: "wrap",
+    padding: 0,
+    margin: 0,
+  },
   container: {
     flex: 1,
     width: "100%",
-    padding: Spacings.s4,
+    margin: Spacings.s4,
     backgroundColor: "white",
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "flex-start",
     gap: Spacings.s6,
-    marginBottom: 100,
+    marginBottom: Spacings.s5,
+    flexWrap: "wrap",
   },
   startContainer: {
-    flex: 1,
     width: "100%",
+    height: 350,
     padding: Spacings.s4,
     backgroundColor: "white",
     display: "flex",
@@ -42,7 +53,11 @@ const styles = StyleSheet.create({
     left: -45,
     position: "absolute",
   },
-  topText: { fontSize: 20, textAlign: "justify" },
+  topTextContainer: { width: "75%" },
+  topText: {
+    fontSize: 20,
+    textAlign: "justify",
+  },
   chartsContainer: {
     display: "flex",
     flexDirection: "column",

@@ -38,6 +38,9 @@ const styles = StyleSheet.create({
   boldText: {
     fontWeight: "bold",
   },
+  secondaryText: {
+    color: "#485460",
+  },
 });
 
 export { styles };

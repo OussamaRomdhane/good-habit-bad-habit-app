@@ -109,8 +109,6 @@ export function HomeScreen() {
 
   const removeTrackedHabit = useSetAtom(removeTrackedHabitAtom);
 
-  const shouldDeletionShowConfirmationDialog = habitIdToDelete !== undefined;
-
   return (
     <>
       <ParallaxScrollView
@@ -129,9 +127,9 @@ export function HomeScreen() {
           {trackedHabits.length > 0 && (
             <>
               <ThemedView style={styles.titleContainer}>
-                <ThemedText style={styles.title}>Hey There!</ThemedText>
+                <ThemedText style={styles.title}>Hey there!</ThemedText>
                 <ThemedText style={styles.subTitle}>
-                  Let's check your progress with your habits
+                  Let’s dive in and see how your habits are shaping up!
                 </ThemedText>
               </ThemedView>
 
@@ -143,7 +141,7 @@ export function HomeScreen() {
               <ThemedView style={styles.titleContainer}>
                 <ThemedText style={styles.title}>Welcome!</ThemedText>
                 <ThemedText style={styles.subTitle}>
-                  Start by adding habits to track
+                  Let’s get started by adding some habits to track!
                 </ThemedText>
               </ThemedView>
               <Image

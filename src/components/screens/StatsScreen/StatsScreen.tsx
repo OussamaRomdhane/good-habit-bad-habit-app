@@ -7,7 +7,7 @@ import {
   PopulationPyramid,
   stackDataItem,
 } from "react-native-gifted-charts";
-import { Image } from "react-native";
+import { Dimensions, Image } from "react-native";
 import { RadioButton, RadioGroup, View } from "react-native-ui-lib";
 import dayjs from "dayjs";
 import { useAtomValue } from "jotai";
@@ -20,6 +20,9 @@ import { IconSymbol } from "../../ui/IconSymbol";
 import { ThemedText } from "../../ThemedText";
 
 import { styles } from "./StatsScreen.styles";
+import { ThemedView } from "../../ThemedView";
+import { ScrollView } from "react-native-gesture-handler";
+import { useThemeColor } from "../../../hooks/useThemeColor";
 
 type ChartDataItem = stackDataItem & { id: string };
 type GroupedActions = {
@@ -181,18 +184,11 @@ export function StatsScreen() {
     ...barChartData.flatMap(({ stacks }) => stacks.map(({ value }) => value))
   );
 
+  const shouldDisplayPieChart =
+    pieData.filter(({ value }) => value > 0).length > 1;
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
-      headerImage={
-        <IconSymbol
-          size={300}
-          color="#808080"
-          name="multiline-chart"
-          style={styles.headerImage}
-        />
-      }
-    >
+    <ThemedView style={styles.root}>
       {habits.length <= 0 && (
         <View style={styles.startContainer}>
           <Image
@@ -216,119 +212,134 @@ export function StatsScreen() {
         </View>
       )}
       {habits.length > 0 && groupedSortedActions.length > 0 && (
-        <View style={styles.container}>
-          <ThemedText style={styles.topText}>
-            Here are the stats for your activity in the past 5 days, it shows
-            the number of performed good habits vs bad habits.
-          </ThemedText>
-          <View>
-            <PieChart showText textColor="white" radius={150} data={pieData} />
-          </View>
-
-          <View style={styles.chartsContainer}>
-            <ThemedText style={styles.chartsTitle}>Charts</ThemedText>
-            <RadioGroup
-              initialValue={visibleChart}
-              onValueChange={(
-                visibleChart: "all | bar-chart" | "pyramid-chart"
-              ) => setVisibleChart(visibleChart)}
-              animated
-              style={styles.chartsRadioGroup}
-            >
-              <RadioButton
-                value="bar-chart"
-                label="📊 Bar chart"
-                style={styles.chartsRadioButton}
-              />
-              <RadioButton
-                value="pyramid-chart"
-                label="🔺 Pyramid chart"
-                style={styles.chartsRadioButton}
-              />
-              <RadioButton
-                value="all"
-                label="Both"
-                style={styles.chartsRadioButton}
-              />
-            </RadioGroup>
-            {(visibleChart === "all" || visibleChart === "bar-chart") && (
-              <BarChart
-                isAnimated
-                barWidth={35}
-                noOfSections={barChartMaxValue < 10 ? barChartMaxValue + 1 : 11}
-                frontColor="lightgray"
-                stackData={barChartData}
-                maxValue={barChartMaxValue + 1}
-                focusBarOnPress
-                yAxisThickness={0}
-                xAxisThickness={0}
-              />
+        <ScrollView>
+          <View style={styles.container}>
+            <View style={styles.topTextContainer}>
+              <ThemedText style={styles.topText}>
+                Here’s a look at your activity over the past 5 days—good habits
+                vs. not-so-good ones!
+              </ThemedText>
+            </View>
+            {shouldDisplayPieChart && (
+              <View>
+                <PieChart
+                  showText
+                  textColor="white"
+                  radius={150}
+                  data={pieData}
+                />
+              </View>
             )}
-            {(visibleChart === "all" || visibleChart === "pyramid-chart") && (
-              <PopulationPyramid
-                data={pyramidData}
-                showMidAxis
-                showYAxisIndices={false}
-                showXAxisIndices={false}
-                showXAxisLabelTexts={false}
-                width={275}
-                yAxisThickness={0}
-                xAxisThickness={0}
-                midAxisLabelWidth={50}
-              />
-            )}
-          </View>
-          <View>
-            <ThemedText style={styles.historyTitle}>History</ThemedText>
-            <View style={styles.historyListContainer}>
-              {groupedSortedActions.map((group) => {
-                return (
-                  <View key={group.label} style={styles.historyGroupContainer}>
-                    <ThemedText style={styles.historyGroupLabel}>
-                      {group.label}
-                    </ThemedText>
-                    {group.actions.map((action) => {
-                      return (
-                        <View
-                          key={action.id}
-                          style={styles.historyGroupItemContainer}
-                        >
+            <View style={styles.chartsContainer}>
+              <ThemedText style={styles.chartsTitle}>Charts</ThemedText>
+              <RadioGroup
+                initialValue={visibleChart}
+                onValueChange={(
+                  visibleChart: "all | bar-chart" | "pyramid-chart"
+                ) => setVisibleChart(visibleChart)}
+                animated
+                style={styles.chartsRadioGroup}
+              >
+                <RadioButton
+                  value="bar-chart"
+                  label="📊 Bar chart"
+                  style={styles.chartsRadioButton}
+                />
+                <RadioButton
+                  value="pyramid-chart"
+                  label="🔺 Pyramid chart"
+                  style={styles.chartsRadioButton}
+                />
+                <RadioButton
+                  value="all"
+                  label="Both"
+                  style={styles.chartsRadioButton}
+                />
+              </RadioGroup>
+              {(visibleChart === "all" || visibleChart === "bar-chart") && (
+                <BarChart
+                  isAnimated
+                  barWidth={35}
+                  noOfSections={
+                    barChartMaxValue < 10 ? barChartMaxValue + 1 : 11
+                  }
+                  frontColor="lightgray"
+                  stackData={barChartData}
+                  maxValue={barChartMaxValue + 1}
+                  focusBarOnPress
+                  yAxisThickness={0}
+                  xAxisThickness={0}
+                />
+              )}
+              {(visibleChart === "all" || visibleChart === "pyramid-chart") && (
+                <PopulationPyramid
+                  data={pyramidData}
+                  showMidAxis
+                  showYAxisIndices={false}
+                  showXAxisIndices={false}
+                  showXAxisLabelTexts={false}
+                  width={275}
+                  yAxisThickness={0}
+                  xAxisThickness={0}
+                  midAxisLabelWidth={50}
+                />
+              )}
+            </View>
+            <View>
+              <ThemedText style={styles.historyTitle}>History</ThemedText>
+              <View style={styles.historyListContainer}>
+                {groupedSortedActions.map((group) => {
+                  return (
+                    <View
+                      key={group.label}
+                      style={styles.historyGroupContainer}
+                    >
+                      <ThemedText style={styles.historyGroupLabel}>
+                        {group.label}
+                      </ThemedText>
+                      {group.actions.map((action) => {
+                        return (
                           <View
-                            style={[
-                              styles.historyGroupItemEmojiContainer,
-                              action.habitType === "bad"
-                                ? styles.historyGroupItemEmojiContainerBad
-                                : styles.historyGroupItemEmojiContainerGood,
-                            ]}
+                            key={action.id}
+                            style={styles.historyGroupItemContainer}
                           >
-                            <ThemedText>{action.habitEmoji}</ThemedText>
-                          </View>
-                          <View style={styles.historyGroupItemTextContainer}>
-                            <ThemedText
-                              style={styles.historyGroupItemTextHabitName}
+                            <View
+                              style={[
+                                styles.historyGroupItemEmojiContainer,
+                                action.habitType === "bad"
+                                  ? styles.historyGroupItemEmojiContainerBad
+                                  : styles.historyGroupItemEmojiContainerGood,
+                              ]}
                             >
-                              {action.habitName}
-                            </ThemedText>
-                            <ThemedText
-                              style={
-                                styles.historyGroupItemTextHabitPerformedDate
-                              }
-                            >
-                              {new Date(
-                                action.performedAt
-                              ).toLocaleTimeString()}
-                            </ThemedText>
+                              <ThemedText>{action.habitEmoji}</ThemedText>
+                            </View>
+                            <View style={styles.historyGroupItemTextContainer}>
+                              <ThemedText
+                                style={styles.historyGroupItemTextHabitName}
+                              >
+                                {action.habitName}
+                              </ThemedText>
+                              <ThemedText
+                                style={
+                                  styles.historyGroupItemTextHabitPerformedDate
+                                }
+                              >
+                                {new Date(
+                                  action.performedAt
+                                ).toLocaleTimeString()}
+                              </ThemedText>
+                            </View>
                           </View>
-                        </View>
-                      );
-                    })}
-                  </View>
-                );
-              })}
+                        );
+                      })}
+                    </View>
+                  );
+                })}
+              </View>
             </View>
           </View>
-        </View>
+        </ScrollView>
       )}
-    </ParallaxScrollView>
+    </ThemedView>
   );
 }

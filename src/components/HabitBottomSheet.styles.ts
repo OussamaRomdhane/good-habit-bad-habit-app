@@ -23,18 +23,18 @@ const styles = StyleSheet.create({
   lastDidContainer: {
     display: "flex",
     flexDirection: "column",
-    gap: Spacings.s1,
+    gap: Spacings.s2,
   },
   lastDidValueContainer: {
     display: "flex",
-    flexDirection: "row",
-    gap: Spacings.s2,
+    flexDirection: "column",
+    gap: Spacings.s1,
     width: "100%",
     marginLeft: Spacings.s4,
   },
   lastDidTitle: { fontSize: 24 },
-  lastDidRelativeDate: { fontSize: 20 },
-  lastDidAbsoluteDate: { fontSize: 14 },
+  lastDidRelativeDate: { fontSize: 18 },
+  lastDidAbsoluteDate: { fontSize: 14, color: "#485460" },
   recentHistoryContainer: {
     display: "flex",
     flexDirection: "column",
