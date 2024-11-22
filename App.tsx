@@ -9,14 +9,15 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Host } from "react-native-portalize";
 import { Colors } from "react-native-ui-lib";
+import { StatusBar } from "expo-status-bar";
 
 import { HomeScreen } from "./src/components/screens/HomeScreen";
 import { useColorScheme } from "./src/hooks/useColorScheme";
 import { IconSymbol } from "./src/components/ui/IconSymbol";
 import { SettingsScreen } from "./src/components/screens/SettingsScreen";
+import { StatsScreen } from "./src/components/screens/StatsScreen";
 
 import { styles } from "./App.styles";
-import { StatusBar } from "expo-status-bar";
 
 type DrawerIconProps = React.ComponentProps<typeof IconSymbol> & {
   isFocused: boolean;
@@ -67,7 +68,7 @@ function RootStack() {
       />
       <Drawer.Screen
         name="Stats"
-        component={() => null}
+        component={StatsScreen}
         options={{ drawerIcon: StatsDrawerIcon }}
       />
       <Drawer.Screen
