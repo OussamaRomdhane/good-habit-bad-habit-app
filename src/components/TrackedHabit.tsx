@@ -3,7 +3,8 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useSetAtom } from "jotai";
 import { View as NativeView } from "react-native";
-import { Badge, Text, TouchableOpacity } from "react-native-ui-lib";
+import { Badge, Text } from "react-native-ui-lib";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 import { IconSymbol } from "./ui/IconSymbol";
 

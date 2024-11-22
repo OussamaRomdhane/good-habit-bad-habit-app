@@ -204,10 +204,21 @@ export function StatsScreen() {
           </ThemedText>
         </View>
       )}
-      {habits.length > 0 && (
+      {habits.length > 0 && groupedSortedActions.length <= 0 && (
+        <View style={styles.startContainer}>
+          <Image
+            style={styles.startImage}
+            source={require("../../../../assets/images/sleeping.png")}
+          />
+          <ThemedText style={styles.startDescription}>
+            No activity found for the past 5 days
+          </ThemedText>
+        </View>
+      )}
+      {habits.length > 0 && groupedSortedActions.length > 0 && (
         <View style={styles.container}>
           <ThemedText style={styles.topText}>
-            Here are the stats for your activity in the past five days, it shows
+            Here are the stats for your activity in the past 5 days, it shows
             the number of performed good habits vs bad habits.
           </ThemedText>
           <View>

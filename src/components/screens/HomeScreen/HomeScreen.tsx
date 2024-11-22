@@ -1,8 +1,13 @@
-import React from "react";
-import { Image, KeyboardAvoidingView } from "react-native";
-
+import React, { useState } from "react";
+import { Image, KeyboardAvoidingView, Animated } from "react-native";
+import {
+  RectButton,
+  Swipeable,
+  TouchableOpacity,
+} from "react-native-gesture-handler";
 import { useAtomValue, useSetAtom } from "jotai";
-import { Button, Colors, Fader, View } from "react-native-ui-lib";
+import { Button, Colors, Fader, Toast, View } from "react-native-ui-lib";
+import Dialog from "react-native-dialog";
 
 import ParallaxScrollView from "../../ParallaxScrollView";
 import { ThemedView } from "../../ThemedView";
@@ -11,18 +16,61 @@ import {
   setCurrentOpenModalAtom,
 } from "../../../state/modals";
 import { AddAHabitModal } from "../../modals/AddAHabitModal";
-import { getTrackedHabitsAtom } from "../../../state/trackedHabits";
+import {
+  getTrackedHabitsAtom,
+  removeTrackedHabitAtom,
+} from "../../../state/trackedHabits";
 import { FiltersAndSortingModal } from "../../modals/FiltersAndSortingModal";
 import { getFiltersAtom } from "../../../state/filters";
 import { HabitBottomSheet } from "../../HabitBottomSheet";
 import { ThemedText } from "../../ThemedText";
 import { TrackedHabit } from "../../TrackedHabit";
 import { FiltersAndSorting } from "../../FiltersAndSorting";
-
-import { styles } from "./HomeScreen.styles";
 import { getMainPageSortingFunction } from "../../../utils/sorting";
 import { getCurrentOpenBottomSheetAtom } from "../../../state/bottomSheets";
 import { setCurrentHighlightedHabitAtom } from "../../../state/highlightedHabit";
+import { IconSymbol } from "../../ui/IconSymbol";
+import { getSecondaryHabitTypeColor } from "../../../utils/colors";
+
+import { styles } from "./HomeScreen.styles";
+
+const getRenderTrackedHabitLeftActions =
+  (args: { onDeleteButtonPressed: () => void }) =>
+  (
+    _progress: Animated.AnimatedInterpolation<string | number>,
+    dragX: Animated.AnimatedInterpolation<string | number>
+  ) => {
+    const trans = dragX.interpolate({
+      inputRange: [0, 50, 100, 101],
+      outputRange: [1, 0, 0, -50],
+    });
+    return (
+      <RectButton style={styles.trackedHabitLeftActionsContainer}>
+        <Animated.View
+          style={[
+            {
+              transform: [{ translateX: trans }],
+            },
+          ]}
+        >
+          <TouchableOpacity
+            style={styles.trackedHabitLeftActionsDeleteButton}
+            onPress={args.onDeleteButtonPressed}
+          >
+            <IconSymbol
+              name="delete"
+              color="white"
+              size={64}
+              style={styles.trackedHabitLeftActionsDeleteButtonIcon}
+            />
+            <ThemedText style={styles.trackedHabitLeftActionsDeleteButtonText}>
+              Delete
+            </ThemedText>
+          </TouchableOpacity>
+        </Animated.View>
+      </RectButton>
+    );
+  };
 
 export function HomeScreen() {
   const filters = useAtomValue(getFiltersAtom);
@@ -54,6 +102,15 @@ export function HomeScreen() {
     );
 
   displayedHabits.sort(getMainPageSortingFunction(sortBy));
+
+  const [shouldShowErrorToast, setShouldShowErrorToast] = useState(false);
+  const [habitIdToDelete, setHabitIdToDelete] = useState<string | undefined>(
+    undefined
+  );
+
+  const removeTrackedHabit = useSetAtom(removeTrackedHabitAtom);
+
+  const shouldDeletionShowConfirmationDialog = habitIdToDelete !== undefined;
 
   return (
     <>
@@ -99,11 +156,20 @@ export function HomeScreen() {
 
           <View style={styles.cardList}>
             {displayedHabits.map((displayedHabit) => (
-              <TrackedHabit
+              <Swipeable
                 key={displayedHabit.id}
-                habit={displayedHabit}
-                onPress={() => setCurrentHighlightedHabit(displayedHabit)}
-              />
+                renderRightActions={getRenderTrackedHabitLeftActions({
+                  onDeleteButtonPressed: () => {
+                    setHabitIdToDelete(displayedHabit.id);
+                  },
+                })}
+                containerStyle={styles.trackedHabitSwipeableContainer}
+              >
+                <TrackedHabit
+                  habit={displayedHabit}
+                  onPress={() => setCurrentHighlightedHabit(displayedHabit)}
+                />
+              </Swipeable>
             ))}
           </View>
 
@@ -114,6 +180,43 @@ export function HomeScreen() {
               <FiltersAndSortingModal />
               <AddAHabitModal />
             </>
+          )}
+          <Toast
+            visible={shouldShowErrorToast}
+            position={"bottom"}
+            autoDismiss={2000}
+            backgroundColor="#e74c3cda"
+            message="Error occurred"
+            onDismiss={() => {
+              setShouldShowErrorToast(false);
+            }}
+            onClose={() => {
+              setShouldShowErrorToast(false);
+            }}
+          />
+          {habitIdToDelete !== undefined && (
+            <Dialog.Container
+              visible
+              onRequestClose={() => setHabitIdToDelete(undefined)}
+            >
+              <Dialog.Title>Remove history item?</Dialog.Title>
+              <Dialog.Description>This cannot be undone</Dialog.Description>
+              <Dialog.Button
+                label="Cancel"
+                onPress={() => setHabitIdToDelete(undefined)}
+              />
+              <Dialog.Button
+                label="Remove"
+                onPress={() => {
+                  if (habitIdToDelete !== undefined) {
+                    removeTrackedHabit(habitIdToDelete);
+                  } else {
+                    setShouldShowErrorToast(true);
+                  }
+                  setHabitIdToDelete(undefined);
+                }}
+              />
+            </Dialog.Container>
           )}
           <HabitBottomSheet />
         </KeyboardAvoidingView>

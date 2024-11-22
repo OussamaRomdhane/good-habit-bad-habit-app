@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { Spacings } from "react-native-ui-lib";
+import { getSecondaryHabitTypeColor } from "../../../utils/colors";
 
 const styles = StyleSheet.create({
   titleContainer: {
@@ -37,6 +38,32 @@ const styles = StyleSheet.create({
   },
   startContainer: { flex: 1 },
   startPicture: { height: 300, width: "100%" },
+  trackedHabitLeftActionsContainer: {
+    width: 100,
+    backgroundColor: "transparent",
+  },
+  trackedHabitSwipeableContainer: {
+    width: "100%",
+    height: 120,
+    backgroundColor: "transparent",
+  },
+  trackedHabitLeftActionsDeleteButton: {
+    height: "100%",
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  trackedHabitLeftActionsDeleteButtonIcon: {
+    borderWidth: 1,
+    borderColor: "transparent",
+    color: getSecondaryHabitTypeColor("bad"),
+  },
+  trackedHabitLeftActionsDeleteButtonText: {
+    color: getSecondaryHabitTypeColor("bad"),
+    fontWeight: "bold",
+  },
 });
 
 export { styles };

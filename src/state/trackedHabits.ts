@@ -224,3 +224,19 @@ export const removeTrackedHabitActionAtom = atom(
     }
   }
 );
+
+export const removeTrackedHabitAtom = atom(
+  null,
+  async (get, set, trackedHabitId: string) => {
+    try {
+      const current = await get(trackedHabitsAtom);
+
+      set(
+        trackedHabitsAtom,
+        current.filter(({ id }) => id !== trackedHabitId)
+      );
+    } catch (e) {
+      console.error(e);
+    }
+  }
+);
