@@ -1,4 +1,4 @@
-package com.anonymous.goodhabitbadhabit
+package com.eiilo.goodhabitbadhabit
 
 import android.os.Build
 import android.os.Bundle

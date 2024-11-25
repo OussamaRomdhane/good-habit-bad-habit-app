@@ -1,4 +1,4 @@
-package com.anonymous.goodhabitbadhabit
+package com.eiilo.goodhabitbadhabit
 
 import android.app.Application
 import android.content.res.Configuration

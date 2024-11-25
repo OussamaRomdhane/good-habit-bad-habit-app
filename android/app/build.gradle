@@ -86,9 +86,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.anonymous.goodhabitbadhabit'
+    namespace 'com.eiilo.goodhabitbadhabit'
     defaultConfig {
-        applicationId 'com.anonymous.goodhabitbadhabit'
+        applicationId 'com.eiilo.goodhabitbadhabit'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
