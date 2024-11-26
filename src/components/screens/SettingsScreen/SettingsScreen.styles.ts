@@ -17,7 +17,20 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   deleteAllDataButton: { marginTop: Spacings.s6, marginBottom: Spacings.s6 },
-  container: { paddingBottom: Spacings.s10 },
+  container: {
+    paddingBottom: Spacings.s10,
+    display: "flex",
+    flexDirection: "column",
+    gap: Spacings.s4,
+  },
+  notificationText: {
+    borderWidth: 2,
+    borderColor: "#2980b9",
+    color: "#2980b9",
+    padding: Spacings.s4,
+    marginBottom: Spacings.s2,
+  },
+  deleteDataText: { fontSize: 14 },
 });
 
 export { styles };

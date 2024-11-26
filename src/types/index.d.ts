@@ -80,3 +80,17 @@ type AppBottomSheet = "tracked-habit-detail";
  */
 
 type AppPage = "home" | "stats" | "settings";
+
+/**
+ * Notifications
+ */
+
+type ScheduledNotification = "main-reminder";
+
+/**
+ * Settings
+ */
+
+type AppSettings = {
+  allowDailyReminders: boolean;
+};
