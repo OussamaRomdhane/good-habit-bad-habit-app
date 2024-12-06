@@ -21,7 +21,7 @@ extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
   }
 }
 
-rootProject.name = 'good-habit-bad-habit'
+rootProject.name = 'GoodHabitBadHabit'
 
 dependencyResolutionManagement {
   versionCatalogs {
