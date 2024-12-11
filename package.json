@@ -42,6 +42,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
+    "@react-native-community/cli": "^15.1.2",
     "@react-native/metro-config": "^0.76.2",
     "@types/react": "~18.3.12",
     "@types/react-native-confetti": "^0.1.4",

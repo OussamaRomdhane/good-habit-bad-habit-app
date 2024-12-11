@@ -1,5 +1,7 @@
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
+android/app/my-upload-key.keystore
+
 # dependencies
 node_modules/
 
