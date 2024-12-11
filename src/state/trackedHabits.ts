@@ -75,7 +75,7 @@ function calculateMostRecentStreakForBadHabits(trackedHabit: TrackedHabit) {
     return Math.max(dayjs(trackedHabit.createdAt).diff(dayjs(), "day"), 1);
   }
 
-  return Math.max(dayjs(actionDates[0]).diff(dayjs(), "day"));
+  return Math.max(dayjs().diff(actionDates[0], "day"), 0);
 }
 
 function calculateMostRecentStreakForGoodHabits(trackedHabit: TrackedHabit) {
@@ -93,13 +93,9 @@ function calculateMostRecentStreakForGoodHabits(trackedHabit: TrackedHabit) {
   }
 
   for (let i = 0; i < actionDates.length; i++) {
-    if (markedDates.length === 0) {
       markedDates.push(actionDates[i]);
-      result++;
-      continue;
-    }
     if (
-      dayjs(actionDates[i]).diff(
+      dayjs(actionDates[0]).diff(
         dayjs(markedDates[markedDates.length - 1]),
         "day"
       ) > 1
