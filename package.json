@@ -1,6 +1,6 @@
 {
   "name": "good-habit-bad-habit",
-  "version": "0.1.0",
+  "version": "0.5.0",
   "private": true,
   "license": "UNLICENSED",
   "main": "index.ts",
@@ -45,6 +45,7 @@
     "@react-native/metro-config": "^0.76.2",
     "@types/react": "~18.3.12",
     "@types/react-native-confetti": "^0.1.4",
+    "expo-build-properties": "^0.13.1",
     "typescript": "^5.3.3"
   }
 }
